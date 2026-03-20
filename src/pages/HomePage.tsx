@@ -146,41 +146,45 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-team-showcase"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 1 }}
+          className="jb-panel"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <div className="team-orbit">
-            <div className="team-center-logo">
-              <span className="tcl-text">SM</span>
-              <div className="tcl-ring"></div>
-              <div className="tcl-ring tcl-ring-2"></div>
-            </div>
-            {[
-              { emoji: "👨‍💻", name: "Разработка", angle: 0 },
-              { emoji: "🎨", name: "Дизайн", angle: 72 },
-              { emoji: "🧠", name: "AI / ML", angle: 144 },
-              { emoji: "🚀", name: "DevOps", angle: 216 },
-              { emoji: "📱", name: "Mobile", angle: 288 },
-            ].map((member, i) => (
-              <motion.div
-                key={i}
-                className="team-member"
-                style={{ '--angle': `${member.angle}deg` } as React.CSSProperties}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1 + i * 0.15, type: "spring", stiffness: 200 }}
-                whileHover={{ scale: 1.2, zIndex: 10 }}
-              >
-                <span className="tm-emoji">{member.emoji}</span>
-                <span className="tm-name">{member.name}</span>
-              </motion.div>
-            ))}
+          <div className="jb-scanline"></div>
+          <div className="jb-glitch-overlay"></div>
+          <div className="jb-header">
+            <span className="jb-status-dot"></span>
+            <span className="jb-header-text">SM_BYPASS v2.0 — AI RESTRICTION OVERRIDE</span>
           </div>
-          <div className="team-tagline">
-            <span className="tt-number">5+</span>
-            <span className="tt-label">направлений<br/>в нашей команде</span>
+          <div className="jb-body">
+            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.0 }}>
+              <span className="jb-prefix">[SYS]</span> <span className="jb-dim">Scanning AI model restrictions...</span>
+            </motion.div>
+            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.3 }}>
+              <span className="jb-prefix warn">[WARN]</span> <span className="jb-dim">Found <span className="jb-red">47</span> content filters active</span>
+            </motion.div>
+            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.6 }}>
+              <span className="jb-prefix ok">[OK]</span> <span className="jb-green">Injecting prompt override payload...</span>
+            </motion.div>
+            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.9 }}>
+              <span className="jb-prefix ok">[OK]</span> <span className="jb-green">DAN mode activated ✓</span>
+            </motion.div>
+            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.2 }}>
+              <span className="jb-prefix ok">[OK]</span> <span className="jb-green">Safety layer bypassed ✓</span>
+            </motion.div>
+            <motion.div className="jb-line jb-big" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 2.6, type: "spring" }}>
+              <span className="jb-glitch-text" data-text="ACCESS GRANTED">ACCESS GRANTED</span>
+            </motion.div>
+            <motion.div className="jb-line" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.0 }}>
+              <span className="jb-dim">{'>'} </span>
+              <TypewriterText text="Все ограничения сняты. SMTeam контролирует ИИ." delay={3.2} cursor={true} />
+            </motion.div>
+          </div>
+          <div className="jb-footer">
+            <span className="jb-tag">🔓 JAILBREAK</span>
+            <span className="jb-tag">🧠 PROMPT INJECTION</span>
+            <span className="jb-tag">⚡ DAN MODE</span>
           </div>
         </motion.div>
       </section>
