@@ -28,6 +28,15 @@ export default function ProjectCard({ project, index, onDelete, onEdit }: Projec
   const downloadFile = async (file: ProjectFile) => {
     try {
       if (file.url.startsWith('blob:') || file.url.startsWith('http')) {
+        // Проверяем жива ли ссылка (через fetch), так как blob после перезагрузки умирает
+        try {
+          const res = await fetch(file.url);
+          if (!res.ok) throw new Error("Dead link");
+        } catch {
+          alert("Этот файл был загружен в предыдущей сессии браузера (до перезагрузки). В режиме локального демо blob-ссылки устаревают. Загрузите файл в проект заново, чтобы его можно было скачать.");
+          return;
+        }
+
         const a = document.createElement('a');
         a.href = file.url;
         a.download = file.name;
@@ -113,7 +122,7 @@ export default function ProjectCard({ project, index, onDelete, onEdit }: Projec
                 <div key={file.id} className="pc-file-item">
                   <span className="pc-file-name">{file.name}</span>
                   <span className="pc-file-size">{(file.size / 1024).toFixed(1)} KB</span>
-                  <button type="button" className="pc-file-dl" onClick={(e) => { e.stopPropagation(); downloadFile(file); }}>
+                  <button type="button" className="pc-file-dl" onClick={(e) => { e.preventDefault(); e.stopPropagation(); downloadFile(file); }}>
                     Скачать
                   </button>
                 </div>
@@ -124,12 +133,12 @@ export default function ProjectCard({ project, index, onDelete, onEdit }: Projec
 
         <div className="pc-actions-row">
           {onEdit && (
-            <button type="button" className="pc-action-btn pc-edit" onClick={(e) => { e.stopPropagation(); onEdit(project); }} title="Редактировать проект">
+            <button type="button" className="pc-action-btn pc-edit" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onEdit(project); }} title="Редактировать проект">
               <i className="fi fi-br-pencil"></i> Редактировать
             </button>
           )}
           {onDelete && (
-            <button type="button" className="pc-action-btn pc-delete" onClick={(e) => { e.stopPropagation(); onDelete(project.id); }} title="Удалить проект">
+            <button type="button" className="pc-action-btn pc-delete" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDelete(project.id); }} title="Удалить проект">
               <i className="fi fi-br-trash"></i> Удалить
             </button>
           )}

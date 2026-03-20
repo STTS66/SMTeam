@@ -9,6 +9,14 @@
   overflow: hidden;
 }
 
+.project-card button,
+.project-card a,
+.project-card .pc-img-thumb {
+  position: relative;
+  z-index: 50 !important;
+  pointer-events: auto;
+}
+
 .project-card::before {
   content: '';
   position: absolute;
