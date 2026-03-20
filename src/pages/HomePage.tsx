@@ -66,16 +66,15 @@ function DraggableCube() {
   useAnimationFrame(() => {
     if (!cubeRef.current) return;
     if (!isDragging.current) {
-      // Inertia
-      velocity.current.x *= 0.95;
-      velocity.current.y *= 0.95;
-      // Auto-spin if low velocity
-      if (Math.abs(velocity.current.y) < 0.3) {
-        autoSpinY.current += 0.4;
+      // Inertia - faster decay
+      velocity.current.x *= 0.92;
+      velocity.current.y *= 0.92;
+      // Auto-spin slowly at 0.06 deg/frame ≈ 3.6 deg/sec
+      if (Math.abs(velocity.current.y) < 0.05) {
+        rotY.current += 0.06;
       } else {
-        autoSpinY.current = 0;
+        rotY.current += velocity.current.y;
       }
-      rotY.current += velocity.current.y + autoSpinY.current * 0.05;
       rotX.current += velocity.current.x;
     }
     cubeRef.current.style.transform = `rotateX(${rotX.current}deg) rotateY(${rotY.current}deg)`;
@@ -136,6 +135,7 @@ function DraggableCube() {
 export default function HomePage({ goToProjects }: HomePageProps) {
   const { projects } = useProjects();
   const recentProjects = projects.slice(0, 4);
+  const [showEngine, setShowEngine] = useState(false);
 
   return (
     <div className="home-page">
@@ -288,6 +288,61 @@ export default function HomePage({ goToProjects }: HomePageProps) {
             ))}
           </div>
         </motion.section>
+      )}
+      {/* Secret button */}
+      <div className="secret-btn-wrap">
+        <button
+          className="secret-btn"
+          onClick={() => setShowEngine(true)}
+          title="..."
+        >
+          ·
+        </button>
+      </div>
+
+      {/* Secret V6 Engine Page */}
+      {showEngine && (
+        <div className="v6-overlay">
+          <button className="v6-exit-btn" onClick={() => setShowEngine(false)}>
+            <i className="fi fi-rr-cross-circle"></i> Выйти
+          </button>
+          <div className="v6-title">🔧 V6 ENGINE</div>
+          <div className="v6-engine">
+            {/* Crankshaft */}
+            <div className="v6-crank">
+              <div className="v6-crank-arm ca1"></div>
+              <div className="v6-crank-arm ca2"></div>
+              <div className="v6-crank-arm ca3"></div>
+            </div>
+            {/* Left bank - 3 cylinders */}
+            <div className="v6-bank left-bank">
+              {[1,2,3].map(i => (
+                <div key={i} className="v6-cylinder-wrap">
+                  <div className={`v6-piston v6-piston-l${i}`}></div>
+                  <div className="v6-cylinder"></div>
+                </div>
+              ))}
+            </div>
+            {/* Right bank - 3 cylinders */}
+            <div className="v6-bank right-bank">
+              {[1,2,3].map(i => (
+                <div key={i} className="v6-cylinder-wrap">
+                  <div className={`v6-piston v6-piston-r${i}`}></div>
+                  <div className="v6-cylinder"></div>
+                </div>
+              ))}
+            </div>
+            {/* Sparks */}
+            <div className="v6-sparks">
+              {[1,2,3,4,5,6].map(i => <div key={i} className={`v6-spark vs${i}`}></div>)}
+            </div>
+          </div>
+          <div className="v6-rpm">
+            <div className="v6-rpm-bar"></div>
+            <span className="v6-rpm-label">RPM: <b>6500</b></span>
+          </div>
+          <div className="v6-caption">Двигатель V6 · 3.5L · 280 л.с. · 6500 об/мин</div>
+        </div>
       )}
     </div>
   );
