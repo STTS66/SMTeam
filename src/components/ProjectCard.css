@@ -16,6 +16,7 @@
   background: radial-gradient(circle at 50% 0%, rgba(255, 59, 48, 0.08), transparent 70%);
   opacity: 0;
   transition: opacity 0.4s;
+  pointer-events: none;
 }
 
 .project-card:hover {
@@ -205,6 +206,9 @@
   font-weight: 600;
   font-family: 'Space Grotesk', sans-serif;
   transition: box-shadow 0.2s;
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .pc-file-dl:hover {
@@ -215,6 +219,8 @@
   display: flex;
   gap: 12px;
   margin-top: 18px;
+  position: relative;
+  z-index: 10;
 }
 
 .pc-action-btn {
