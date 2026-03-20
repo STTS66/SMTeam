@@ -146,28 +146,40 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-visual"
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          className="hero-features-grid"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.8 }}
         >
-          <div className="hero-terminal">
-            <div className="ht-header">
-               <div className="ht-btns">
-                 <span className="ht-btn close"></span>
-                 <span className="ht-btn min"></span>
-                 <span className="ht-btn max"></span>
-               </div>
-               <div className="ht-title">smteam-dev — bash</div>
+          <div className="feature-box box-1">
+            <div className="fb-icon"><i className="fi fi-br-rocket-lunch"></i></div>
+            <div className="fb-content">
+              <h4>Быстрый релиз</h4>
+              <p>От идеи до продакшена в рекордные сроки без потери качества</p>
             </div>
-            <div className="ht-body">
-              <p><span className="ht-path">~/SMTeam</span> <span className="ht-prompt">❯</span> <span className="ht-cmd">npm run start-protocol</span></p>
-              <p className="ht-out system">[INIT] Booting SMTeam Core V2.0.0...</p>
-              <p className="ht-out success">✔ Neural network synced</p>
-              <p className="ht-out success">✔ PostgreSQL DB connected to Neon</p>
-              <p className="ht-out success">✔ Modules assembled successfully</p>
-              <br/>
-              <p><span className="ht-path">~/SMTeam</span> <span className="ht-prompt">❯</span> <TypewriterText text="Ready to create history..." delay={2} cursor={true} /></p>
+          </div>
+          
+          <div className="feature-box box-2">
+            <div className="fb-icon"><i className="fi fi-br-lightbulb-on"></i></div>
+            <div className="fb-content">
+              <h4>Инновации</h4>
+              <p>Внедряем современные AI-технологии и нестандартные подходы</p>
+            </div>
+          </div>
+          
+          <div className="feature-box box-3">
+            <div className="fb-icon"><i className="fi fi-br-bolt"></i></div>
+            <div className="fb-content">
+              <h4>Мощный стек</h4>
+              <p>React, TypeScript, современные фреймворки и чистая архитектура</p>
+            </div>
+          </div>
+          
+          <div className="feature-box box-4">
+            <div className="fb-icon"><i className="fi fi-br-bullseye-pointer"></i></div>
+            <div className="fb-content">
+              <h4>Супер Результат</h4>
+              <p>Создаём топовые продукты, которые действительно нравятся людям</p>
             </div>
           </div>
         </motion.div>
