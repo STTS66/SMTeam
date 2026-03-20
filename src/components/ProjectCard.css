@@ -1,0 +1,270 @@
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 59, 48, 0.06);
+}
+
+.pc-header {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.pc-accent-bar {
+  position: absolute;
+  top: -28px;
+  left: -28px;
+  right: -28px;
+  height: 3px;
+  background: var(--card-accent, var(--accent-blue));
+  opacity: 0.6;
+}
+
+.pc-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.pc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pc-author {
+  color: var(--card-accent, var(--accent-blue));
+  font-weight: 600;
+}
+
+.pc-dot {
+  color: var(--text-muted);
+}
+
+.pc-date {
+  color: var(--text-muted);
+}
+
+.pc-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-height: 80px;
+  overflow: hidden;
+  transition: max-height 0.4s;
+  margin-bottom: 8px;
+}
+
+.pc-desc.expanded {
+  max-height: 2000px;
+}
+
+.pc-expand {
+  background: none;
+  color: var(--accent-blue);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pc-expand:hover {
+  color: var(--accent-cyan);
+}
+
+.pc-media-section {
+  margin-top: 16px;
+}
+
+.pc-media-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pc-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+}
+
+.pc-img-thumb {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.pc-img-thumb:hover {
+  transform: scale(1.05);
+  border-color: var(--accent-blue);
+}
+
+.pc-img-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pc-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.pc-video-thumb {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.pc-video-thumb video {
+  width: 100%;
+  display: block;
+  background: #000;
+}
+
+.pc-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pc-file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.pc-file-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pc-file-size {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pc-file-dl {
+  padding: 5px 14px;
+  background: var(--gradient-main);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: box-shadow 0.2s;
+}
+
+.pc-file-dl:hover {
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+}
+
+.pc-delete {
+  width: 100%;
+  margin-top: 18px;
+  padding: 10px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 10px;
+  color: #f87171;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.25s;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.pc-delete:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Lightbox */
+.pc-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  cursor: pointer;
+  animation: fadeIn 0.2s;
+}
+
+.pc-lightbox-inner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default;
+}
+
+.pc-lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.pc-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.pc-lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.pc-lightbox-video {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 12px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
