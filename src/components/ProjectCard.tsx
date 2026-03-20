@@ -7,9 +7,10 @@ interface ProjectCardProps {
   project: Project;
   index: number;
   onDelete?: (id: string) => void;
+  onEdit?: (project: Project) => void;
 }
 
-export default function ProjectCard({ project, index, onDelete }: ProjectCardProps) {
+export default function ProjectCard({ project, index, onDelete, onEdit }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
   const [lightbox, setLightbox] = useState<{ url: string; type: string } | null>(null);
 
@@ -24,11 +25,21 @@ export default function ProjectCard({ project, index, onDelete }: ProjectCardPro
   const colorAccents = ['#ff3b30', '#ff453a', '#ff6961', '#aeaeb2', '#8e8e93', '#636366'];
   const accentColor = colorAccents[index % colorAccents.length];
 
-  const downloadFile = (file: ProjectFile) => {
-    const a = document.createElement('a');
-    a.href = file.url;
-    a.download = file.name;
-    a.click();
+  const downloadFile = async (file: ProjectFile) => {
+    try {
+      if (file.url.startsWith('blob:') || file.url.startsWith('http')) {
+        const a = document.createElement('a');
+        a.href = file.url;
+        a.download = file.name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        alert("Файл недоступен для скачивания (демо-режим).");
+      }
+    } catch {
+      alert("Ошибка при скачивании файла.");
+    }
   };
 
   return (
@@ -102,7 +113,7 @@ export default function ProjectCard({ project, index, onDelete }: ProjectCardPro
                 <div key={file.id} className="pc-file-item">
                   <span className="pc-file-name">{file.name}</span>
                   <span className="pc-file-size">{(file.size / 1024).toFixed(1)} KB</span>
-                  <button className="pc-file-dl" onClick={() => downloadFile(file)}>
+                  <button type="button" className="pc-file-dl" onClick={(e) => { e.stopPropagation(); downloadFile(file); }}>
                     Скачать
                   </button>
                 </div>
@@ -111,11 +122,18 @@ export default function ProjectCard({ project, index, onDelete }: ProjectCardPro
           </div>
         )}
 
-        {onDelete && (
-          <button className="pc-delete" onClick={() => onDelete(project.id)} title="Удалить проект">
-            <i className="fi fi-br-trash"></i>
-          </button>
-        )}
+        <div className="pc-actions-row">
+          {onEdit && (
+            <button type="button" className="pc-action-btn pc-edit" onClick={(e) => { e.stopPropagation(); onEdit(project); }} title="Редактировать проект">
+              <i className="fi fi-br-pencil"></i> Редактировать
+            </button>
+          )}
+          {onDelete && (
+            <button type="button" className="pc-action-btn pc-delete" onClick={(e) => { e.stopPropagation(); onDelete(project.id); }} title="Удалить проект">
+              <i className="fi fi-br-trash"></i> Удалить
+            </button>
+          )}
+        </div>
       </motion.div>
 
       {/* Lightbox */}

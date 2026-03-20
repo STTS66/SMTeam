@@ -211,23 +211,47 @@
   box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
 }
 
-.pc-delete {
-  width: 100%;
+.pc-actions-row {
+  display: flex;
+  gap: 12px;
   margin-top: 18px;
+}
+
+.pc-action-btn {
+  flex: 1;
   padding: 10px;
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.2);
   border-radius: 10px;
-  color: #f87171;
   font-size: 13px;
   font-weight: 600;
   transition: all 0.25s;
   font-family: 'Space Grotesk', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.pc-delete {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #f87171;
 }
 
 .pc-delete:hover {
   background: rgba(239, 68, 68, 0.15);
   border-color: rgba(239, 68, 68, 0.4);
+}
+
+.pc-edit {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+.pc-edit:hover {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
 /* Lightbox */

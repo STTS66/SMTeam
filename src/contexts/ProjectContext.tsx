@@ -5,6 +5,7 @@ import type { Project, ProjectFile } from '../types';
 interface ProjectContextType {
   projects: Project[];
   addProject: (title: string, description: string, files: ProjectFile[], authorId: string, authorName: string) => void;
+  updateProject: (projectId: string, title: string, description: string, files: ProjectFile[]) => void;
   deleteProject: (projectId: string) => void;
 }
 
@@ -36,12 +37,21 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     setProjects(prev => [newProject, ...prev]);
   };
 
+  const updateProject = (projectId: string, title: string, description: string, files: ProjectFile[]) => {
+    setProjects(prev => prev.map(p => {
+      if (p.id === projectId) {
+        return { ...p, title, description, files };
+      }
+      return p;
+    }));
+  };
+
   const deleteProject = (projectId: string) => {
     setProjects(prev => prev.filter(p => p.id !== projectId));
   };
 
   return (
-    <ProjectContext.Provider value={{ projects, addProject, deleteProject }}>
+    <ProjectContext.Provider value={{ projects, addProject, updateProject, deleteProject }}>
       {children}
     </ProjectContext.Provider>
   );

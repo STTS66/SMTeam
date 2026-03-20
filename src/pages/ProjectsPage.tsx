@@ -8,12 +8,30 @@ import './ProjectsPage.css';
 
 export default function ProjectsPage() {
   const { user } = useAuth();
-  const { projects, addProject, deleteProject } = useProjects();
+  const { projects, addProject, updateProject, deleteProject } = useProjects();
   const [showForm, setShowForm] = useState(false);
+  const [editProjectId, setEditProjectId] = useState<string | null>(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedFiles, setSelectedFiles] = useState<ProjectFile[]>([]);
   const [publishing, setPublishing] = useState(false);
+
+  const startEdit = (project: any) => {
+    setEditProjectId(project.id);
+    setTitle(project.title);
+    setDescription(project.description);
+    setSelectedFiles(project.files || []);
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const cancelEdit = () => {
+    setEditProjectId(null);
+    setTitle('');
+    setDescription('');
+    setSelectedFiles([]);
+    setShowForm(false);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
@@ -54,7 +72,7 @@ export default function ProjectsPage() {
   const removeFile = (id: string) => {
     setSelectedFiles(prev => {
       const f = prev.find(x => x.id === id);
-      if (f) URL.revokeObjectURL(f.url);
+      if (f && f.url.startsWith('blob:')) URL.revokeObjectURL(f.url);
       return prev.filter(x => x.id !== id);
     });
   };
@@ -63,11 +81,14 @@ export default function ProjectsPage() {
     if (!title.trim() || !description.trim() || !user) return;
     setPublishing(true);
     await new Promise(r => setTimeout(r, 600));
-    addProject(title, description, selectedFiles, user.id, user.displayName);
-    setTitle('');
-    setDescription('');
-    setSelectedFiles([]);
-    setShowForm(false);
+    
+    if (editProjectId) {
+      updateProject(editProjectId, title, description, selectedFiles);
+    } else {
+      addProject(title, description, selectedFiles, user.id, user.displayName);
+    }
+    
+    cancelEdit();
     setPublishing(false);
   };
 
@@ -88,11 +109,14 @@ export default function ProjectsPage() {
         {user?.isAdmin && (
           <motion.button
             className="pp-add-btn"
-            onClick={() => setShowForm(!showForm)}
+            onClick={() => {
+              if (showForm) cancelEdit();
+              else setShowForm(true);
+            }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
-            {showForm ? '✕ Закрыть' : '+ Новый проект'}
+            {showForm ? '✕ Отменить' : '+ Новый проект'}
           </motion.button>
         )}
       </div>
@@ -108,7 +132,7 @@ export default function ProjectsPage() {
             transition={{ duration: 0.35 }}
           >
             <div className="pp-form-inner">
-              <h2 className="pp-form-title">Опубликовать проект</h2>
+              <h2 className="pp-form-title">{editProjectId ? 'Редактировать проект' : 'Опубликовать проект'}</h2>
 
               <div className="pp-field">
                 <label className="pp-label">Название проекта</label>
@@ -162,7 +186,7 @@ export default function ProjectsPage() {
                         {f.type === 'image' ? <i className="fi fi-br-picture"></i> : f.type === 'video' ? <i className="fi fi-br-play-alt"></i> : <i className="fi fi-br-document"></i>}
                       </span>
                       <span className="pp-chip-name">{f.name}</span>
-                      <button className="pp-chip-remove" onClick={() => removeFile(f.id)}>✕</button>
+                      <button type="button" className="pp-chip-remove" onClick={() => removeFile(f.id)}>✕</button>
                     </div>
                   ))}
                 </div>
@@ -180,7 +204,7 @@ export default function ProjectsPage() {
                 ) : (
                   <>
                     <i className="fi fi-br-check-circle"></i>
-                    Опубликовать
+                    {editProjectId ? 'Сохранить изменения' : 'Опубликовать'}
                   </>
                 )}
               </motion.button>
@@ -208,6 +232,7 @@ export default function ProjectsPage() {
               key={project.id}
               project={project}
               index={idx}
+              onEdit={user?.isAdmin ? startEdit : undefined}
               onDelete={user?.isAdmin ? deleteProject : undefined}
             />
           ))}
