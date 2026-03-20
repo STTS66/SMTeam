@@ -146,45 +146,21 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="jb-panel"
+          className="hero-radar-panel"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <div className="jb-scanline"></div>
-          <div className="jb-glitch-overlay"></div>
-          <div className="jb-header">
-            <span className="jb-status-dot"></span>
-            <span className="jb-header-text">SM_BYPASS v2.0 — AI RESTRICTION OVERRIDE</span>
-          </div>
-          <div className="jb-body">
-            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.0 }}>
-              <span className="jb-prefix">[SYS]</span> <span className="jb-dim">Scanning AI model restrictions...</span>
-            </motion.div>
-            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.3 }}>
-              <span className="jb-prefix warn">[WARN]</span> <span className="jb-dim">Found <span className="jb-red">47</span> content filters active</span>
-            </motion.div>
-            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.6 }}>
-              <span className="jb-prefix ok">[OK]</span> <span className="jb-green">Injecting prompt override payload...</span>
-            </motion.div>
-            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.9 }}>
-              <span className="jb-prefix ok">[OK]</span> <span className="jb-green">DAN mode activated ✓</span>
-            </motion.div>
-            <motion.div className="jb-line" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.2 }}>
-              <span className="jb-prefix ok">[OK]</span> <span className="jb-green">Safety layer bypassed ✓</span>
-            </motion.div>
-            <motion.div className="jb-line jb-big" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 2.6, type: "spring" }}>
-              <span className="jb-glitch-text" data-text="ACCESS GRANTED">ACCESS GRANTED</span>
-            </motion.div>
-            <motion.div className="jb-line" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.0 }}>
-              <span className="jb-dim">{'>'} </span>
-              <TypewriterText text="Все ограничения сняты. SMTeam контролирует ИИ." delay={3.2} cursor={true} />
-            </motion.div>
-          </div>
-          <div className="jb-footer">
-            <span className="jb-tag"><i className="fi fi-br-unlock"></i> JAILBREAK</span>
-            <span className="jb-tag"><i className="fi fi-br-brain"></i> PROMPT INJECTION</span>
-            <span className="jb-tag"><i className="fi fi-br-bolt"></i> DAN MODE</span>
+          <div className="radar-circle">
+            <div className="radar-grid"></div>
+            <div className="radar-beam"></div>
+            
+            <div className="radar-dot dot-1"><div className="dot-pulse"></div><span>10+ Проектов</span></div>
+            <div className="radar-dot dot-2"><div className="dot-pulse"></div><span>Web & Mobile</span></div>
+            <div className="radar-dot dot-3"><div className="dot-pulse"></div><span>Нейросети</span></div>
+            <div className="radar-dot dot-4"><div className="dot-pulse"></div><span>Автоматизация</span></div>
+            
+            <div className="radar-logo">SM</div>
           </div>
         </motion.div>
       </section>

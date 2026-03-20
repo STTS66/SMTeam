@@ -145,196 +145,172 @@
   left: 130%;
 }
 
-/* Jailbreak Panel */
-.jb-panel {
+/* Radar Panel */
+.hero-radar-panel {
   width: 100%;
-  max-width: 750px;
+  max-width: 600px;
+  height: 400px;
   margin: 30px auto 0;
-  background: rgba(5, 5, 15, 0.92);
-  border: 1px solid rgba(255, 59, 48, 0.15);
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 0 50px rgba(255, 59, 48, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
-  font-family: 'Fira Code', 'Courier New', monospace;
-}
-
-.jb-scanline {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(255, 59, 48, 0.015) 2px,
-    rgba(255, 59, 48, 0.015) 4px
-  );
-  pointer-events: none;
-  z-index: 10;
-}
-
-.jb-glitch-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 59, 48, 0.03) 50%, transparent 100%);
-  animation: jbScanMove 4s linear infinite;
-  pointer-events: none;
-  z-index: 10;
-}
-
-@keyframes jbScanMove {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
-.jb-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 20px;
-  background: rgba(255, 59, 48, 0.05);
-  border-bottom: 1px solid rgba(255, 59, 48, 0.1);
+  justify-content: center;
+  position: relative;
 }
 
-.jb-status-dot {
+.radar-circle {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 59, 48, 0.4);
+  background: radial-gradient(circle, rgba(255, 59, 48, 0.05), rgba(10, 10, 26, 0.8));
+  box-shadow: 0 0 50px rgba(255, 59, 48, 0.15), inset 0 0 40px rgba(255, 59, 48, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Internal rings */
+.radar-circle::before, .radar-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 59, 48, 0.2);
+}
+
+.radar-circle::before {
+  width: 220px;
+  height: 220px;
+}
+
+.radar-circle::after {
+  width: 120px;
+  height: 120px;
+}
+
+.radar-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 59, 48, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 59, 48, 0.15) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+  opacity: 0.4;
+}
+
+.radar-grid::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  background: rgba(255, 59, 48, 0.3);
+}
+
+.radar-grid::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: rgba(255, 59, 48, 0.3);
+}
+
+.radar-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 160px;
+  height: 160px;
+  background: conic-gradient(transparent 10%, rgba(255, 59, 48, 0.05) 50%, rgba(255, 59, 48, 0.6) 100%);
+  transform-origin: 0 0;
+  animation: radarSpin 4s linear infinite;
+  z-index: 2;
+}
+
+@keyframes radarSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-main);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(255, 59, 48, 0.6);
+}
+
+.radar-dot {
+  position: absolute;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
   background: #ff3b30;
-  box-shadow: 0 0 8px #ff3b30;
-  animation: jbBlink 1.5s ease-in-out infinite;
-}
-
-@keyframes jbBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.jb-header-text {
-  font-size: 12px;
-  color: #ff3b30;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.jb-body {
-  padding: 20px 24px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ff3b30, 0 0 20px #ff3b30;
+  z-index: 5;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.jb-line {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #e0e0e0;
-}
-
-.jb-prefix {
-  color: #636366;
-  font-weight: 700;
-}
-
-.jb-prefix.warn { color: #ff9500; }
-.jb-prefix.ok { color: #ff3b30; }
-
-.jb-dim { color: #8e8e93; }
-.jb-green { color: #ff6961; }
-.jb-red { color: #ff3b30; font-weight: 700; }
-
-.jb-big {
-  margin: 12px 0 8px;
-  text-align: center;
-}
-
-.jb-glitch-text {
-  font-family: 'Outfit', sans-serif;
-  font-size: 36px;
-  font-weight: 900;
-  color: #ff3b30;
-  text-shadow: 0 0 20px rgba(255, 59, 48, 0.5), 0 0 60px rgba(255, 59, 48, 0.2);
-  letter-spacing: 6px;
-  position: relative;
-  display: inline-block;
-  animation: jbGlitch 3s ease-in-out infinite;
-}
-
-.jb-glitch-text::before,
-.jb-glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.jb-glitch-text::before {
-  color: #ff6961;
-  animation: jbGlitchLeft 2s ease-in-out infinite alternate;
-  clip-path: inset(0 65% 0 0);
-}
-
-.jb-glitch-text::after {
-  color: #00b4d8;
-  animation: jbGlitchRight 2.5s ease-in-out infinite alternate-reverse;
-  clip-path: inset(0 0 0 65%);
-}
-
-@keyframes jbGlitch {
-  0%, 90%, 100% { transform: none; }
-  92% { transform: skewX(-2deg); }
-  94% { transform: skewX(1deg); }
-  96% { transform: skewX(-1deg); }
-}
-
-@keyframes jbGlitchLeft {
-  0%, 80% { transform: translateX(0); }
-  85% { transform: translateX(-3px); }
-  90% { transform: translateX(2px); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes jbGlitchRight {
-  0%, 80% { transform: translateX(0); }
-  85% { transform: translateX(3px); }
-  90% { transform: translateX(-2px); }
-  100% { transform: translateX(0); }
-}
-
-.jb-footer {
-  padding: 14px 24px;
-  border-top: 1px solid rgba(255, 59, 48, 0.1);
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.jb-tag {
-  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 14px;
-  border-radius: 100px;
-  background: rgba(255, 59, 48, 0.08);
-  border: 1px solid rgba(255, 59, 48, 0.2);
-  color: #ff3b30;
+}
+
+.dot-pulse {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 59, 48, 0.5);
+  animation: radarPulse 2s ease-out infinite;
+}
+
+@keyframes radarPulse {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+.radar-dot span {
+  position: absolute;
+  left: 15px;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s;
-  cursor: pointer;
+  color: #fff;
+  background: rgba(255, 59, 48, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  backdrop-filter: blur(4px);
+  opacity: 0.8;
 }
 
-.jb-tag i {
-  font-size: 12px;
+.dot-1 { top: 30%; left: 70%; animation: fadeDot 4s infinite; animation-delay: 0.5s; }
+.dot-2 { top: 70%; left: 70%; animation: fadeDot 4s infinite; animation-delay: 1.5s; }
+.dot-3 { top: 70%; left: 30%; animation: fadeDot 4s infinite; animation-delay: 2.5s; }
+.dot-4 { top: 30%; left: 30%; animation: fadeDot 4s infinite; animation-delay: 3.5s; }
+
+.dot-3 span, .dot-4 span {
+  left: auto;
+  right: 15px;
 }
 
-.jb-tag:hover {
-  background: rgba(255, 59, 48, 0.18);
-  box-shadow: 0 0 15px rgba(255, 59, 48, 0.2);
-  transform: translateY(-2px);
+@keyframes fadeDot {
+  0%, 10% { opacity: 0; transform: scale(0.5); }
+  15%, 40% { opacity: 1; transform: scale(1); }
+  50%, 100% { opacity: 0; transform: scale(0.5); }
 }
 
 /* Stats */
@@ -493,13 +469,18 @@
     line-height: 1.5;
   }
 
-  .jb-header-text {
-    font-size: 10px;
-    letter-spacing: 1px;
+  .hero-radar-panel {
+    height: 300px;
   }
 
-  .jb-line { font-size: 12px; }
-  .jb-glitch-text { font-size: 24px; letter-spacing: 3px; }
-  .jb-body { padding: 16px; }
-  .jb-tag { font-size: 10px; padding: 4px 10px; }
+  .radar-circle {
+    width: 240px;
+    height: 240px;
+  }
+
+  .radar-circle::before { width: 160px; height: 160px; }
+  .radar-circle::after { width: 80px; height: 80px; }
+  .radar-beam { width: 120px; height: 120px; }
+
+  .radar-dot span { font-size: 9px; padding: 2px 6px; }
 }
