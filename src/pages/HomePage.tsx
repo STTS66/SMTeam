@@ -146,41 +146,36 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-bento-grid"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
+           className="hero-data-cube-wrap"
+           initial={{ opacity: 0, scale: 0.5 }}
+           animate={{ opacity: 1, scale: 1 }}
+           transition={{ delay: 0.5, type: 'spring' }}
         >
-          <div className="bento-card bento-main">
-            <div className="bento-bg bg-gradient-1"></div>
-            <div className="bento-content">
-              <div className="bento-icon"><i className="fi fi-rr-brain"></i></div>
-              <h3>AI Solutions</h3>
-              <p>Интеграция нейросетей, машинное обучение и LLM-агенты под ваш бизнес.</p>
+          <div className="hero-data-cube">
+            <div className="cube-core"></div>
+            <div className="cube-face cube-front">
+              <i className="fi fi-rr-browser"></i>
+              <span>Web</span>
             </div>
-          </div>
-          <div className="bento-card bento-small-1">
-            <div className="bento-bg bg-gradient-2"></div>
-            <div className="bento-content">
-              <div className="bento-icon"><i className="fi fi-rr-smartphone"></i></div>
-              <h4>Mobile Dev</h4>
+            <div className="cube-face cube-back">
+               <i className="fi fi-rr-smartphone"></i>
+               <span>App</span>
             </div>
-          </div>
-          <div className="bento-card bento-small-2">
-            <div className="bento-bg bg-gradient-3"></div>
-            <div className="bento-content">
-              <div className="bento-icon"><i className="fi fi-rr-laptop"></i></div>
-              <h4>Web Platforms</h4>
+            <div className="cube-face cube-right">
+               <i className="fi fi-rr-shield-check"></i>
+               <span>Sec</span>
             </div>
-          </div>
-          <div className="bento-card bento-long">
-            <div className="bento-bg bg-gradient-4"></div>
-            <div className="bento-content">
-              <div className="bento-icon"><i className="fi fi-rr-rocket-lunch"></i></div>
-              <div className="bento-text-row">
-                <h4>Smart Automation</h4>
-                <span>Оптимизация корпоративных процессов</span>
-              </div>
+            <div className="cube-face cube-left">
+               <i className="fi fi-rr-database"></i>
+               <span>Data</span>
+            </div>
+            <div className="cube-face cube-top">
+               <i className="fi fi-rr-brain"></i>
+               <span>AI</span>
+            </div>
+            <div className="cube-face cube-bottom">
+               <i className="fi fi-rr-rocket-lunch"></i>
+               <span>Boost</span>
             </div>
           </div>
         </motion.div>
