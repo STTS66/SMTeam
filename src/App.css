@@ -62,3 +62,12 @@
   text-transform: uppercase;
   color: var(--text-secondary);
 }
+
+@media (max-width: 600px) {
+  .splash-counter {
+    font-size: 60px;
+  }
+  .splash-track {
+    width: 180px;
+  }
+}

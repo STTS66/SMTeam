@@ -184,17 +184,51 @@
 }
 
 @media (max-width: 768px) {
-  .header-inner {
-    padding: 0 16px;
-    height: 60px;
+  .header {
+    margin: 8px 12px;
+    border-radius: 16px;
+    top: 8px;
   }
 
-  .header-user-info {
-    display: none;
+  .header-inner {
+    padding: 0 12px;
+    height: 56px;
+    gap: 12px;
+  }
+
+  .header-brand {
+    font-size: 18px;
+  }
+  
+  .header-logo svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .header-nav {
+    gap: 4px;
   }
 
   .header-nav-btn {
-    padding: 8px 12px;
+    padding: 6px 10px;
     font-size: 13px;
+    gap: 6px;
+  }
+  
+  .header-nav-btn span {
+    display: none; /* Hide text on mobile, just show icons */
+  }
+
+  .header-user-details {
+    display: none; /* Hide name/badge on mobile */
+  }
+  
+  .header-user-info {
+    padding: 0;
+    gap: 4px;
+  }
+  
+  .header-logout {
+    margin-left: 0;
   }
 }
