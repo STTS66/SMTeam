@@ -131,86 +131,82 @@
   margin-top: 20px;
 }
 
-.hero-card-stack {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
+.hero-terminal {
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
+  background: rgba(10, 10, 18, 0.85);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 59, 48, 0.15);
+  overflow: hidden;
+  text-align: left;
 }
 
-.hero-float-card {
-  position: relative;
+.ht-header {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  background: rgba(17, 17, 39, 0.85);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 100px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  white-space: nowrap;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.hero-float-card:hover {
-  background: rgba(255, 59, 48, 0.15);
-  border-color: rgba(255, 59, 48, 0.3);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(255, 59, 48, 0.2);
+.ht-btns {
+  display: flex;
+  gap: 8px;
 }
 
-.hfc-icon {
-  font-size: 20px;
-  color: var(--accent-red);
+.ht-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
 }
 
-.hfc-text {
+.ht-btn.close { background: #ff5f56; }
+.ht-btn.min { background: #ffbd2e; }
+.ht-btn.max { background: #27c93f; }
+
+.ht-title {
+  flex: 1;
+  text-align: center;
+  color: var(--text-muted);
   font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  margin-right: 56px;
+}
+
+.ht-body {
+  padding: 24px;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #fff;
+}
+
+.ht-path {
+  color: var(--accent-blue);
+  font-weight: bold;
+}
+
+.ht-prompt {
+  color: #ff3b30;
+  margin: 0 8px;
+}
+
+.ht-cmd {
+  color: #e2e8f0;
+}
+
+.ht-out {
+  margin-top: 4px;
+  padding-left: 20px;
   font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
 }
 
-.hfc-1 {
-  animation: floatCard1 4s ease-in-out infinite alternate;
-}
-
-.hfc-2 {
-  animation: floatCard2 5s ease-in-out infinite alternate-reverse;
-}
-
-.hfc-3 {
-  animation: floatCard3 6s ease-in-out infinite alternate;
-}
-
-.hfc-4 {
-  animation: floatCard4 4.5s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes floatCard1 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes floatCard2 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(2deg); }
-}
-
-@keyframes floatCard3 {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-@keyframes floatCard4 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(-2deg); }
-}
+.ht-out.system { color: #8e8e93; }
+.ht-out.success { color: #34d399; }
+.ht-out.error { color: #f87171; }
 
 /* Stats */
 .stats-section {

@@ -147,47 +147,28 @@ export default function HomePage({ goToProjects }: HomePageProps) {
 
         <motion.div
           className="hero-visual"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <div className="hero-card-stack">
-            <motion.div 
-              className="hero-float-card hfc-1"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
-            >
-              <i className="fi fi-br-rocket-lunch hfc-icon"></i>
-              <span className="hfc-text">Запуск проектов</span>
-            </motion.div>
-            <motion.div 
-              className="hero-float-card hfc-2"
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
-            >
-              <i className="fi fi-br-lightbulb-on hfc-icon"></i>
-              <span className="hfc-text">Инновации</span>
-            </motion.div>
-            <motion.div 
-              className="hero-float-card hfc-3"
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 1.0, type: "spring", stiffness: 100 }}
-            >
-              <i className="fi fi-br-bolt hfc-icon"></i>
-              <span className="hfc-text">Технологии</span>
-            </motion.div>
-            <motion.div 
-              className="hero-float-card hfc-4"
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 1.2, type: "spring", stiffness: 100 }}
-            >
-              <i className="fi fi-br-bullseye-pointer hfc-icon"></i>
-              <span className="hfc-text">Результат</span>
-            </motion.div>
+          <div className="hero-terminal">
+            <div className="ht-header">
+               <div className="ht-btns">
+                 <span className="ht-btn close"></span>
+                 <span className="ht-btn min"></span>
+                 <span className="ht-btn max"></span>
+               </div>
+               <div className="ht-title">smteam-dev — bash</div>
+            </div>
+            <div className="ht-body">
+              <p><span className="ht-path">~/SMTeam</span> <span className="ht-prompt">❯</span> <span className="ht-cmd">npm run start-protocol</span></p>
+              <p className="ht-out system">[INIT] Booting SMTeam Core V2.0.0...</p>
+              <p className="ht-out success">✔ Neural network synced</p>
+              <p className="ht-out success">✔ PostgreSQL DB connected to Neon</p>
+              <p className="ht-out success">✔ Modules assembled successfully</p>
+              <br/>
+              <p><span className="ht-path">~/SMTeam</span> <span className="ht-prompt">❯</span> <TypewriterText text="Ready to create history..." delay={2} cursor={true} /></p>
+            </div>
           </div>
         </motion.div>
       </section>
