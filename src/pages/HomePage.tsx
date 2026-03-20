@@ -146,44 +146,44 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-features-grid"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.8 } },
-          }}
+          className="hero-wave-banner"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 1 }}
         >
-          {[
-            { icon: "fi fi-br-rocket-lunch", title: "Быстрый релиз", desc: "От идеи до продакшена в рекордные сроки без потери качества" },
-            { icon: "fi fi-br-lightbulb-on", title: "Инновации", desc: "Внедряем современные AI-технологии и нестандартные подходы" },
-            { icon: "fi fi-br-bolt", title: "Мощный стек", desc: "React, TypeScript, современные фреймворки и чистая архитектура" },
-            { icon: "fi fi-br-bullseye-pointer", title: "Супер Результат", desc: "Создаём топовые продукты, которые действительно нравятся людям" },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              className="feature-box"
-              variants={{ hidden: { opacity: 0, y: 30, scale: 0.95 }, visible: { opacity: 1, y: 0, scale: 1 } }}
-              whileHover={{ 
-                y: -8, 
-                scale: 1.04, 
-                boxShadow: "0 25px 60px rgba(255, 59, 48, 0.2), 0 0 30px rgba(255, 59, 48, 0.1)",
-                borderColor: "rgba(255, 59, 48, 0.4)",
-                transition: { type: "spring", stiffness: 300, damping: 20 }
-              }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <motion.div 
-                className="fb-icon"
-                whileHover={{ rotate: [0, -10, 10, -5, 0], transition: { duration: 0.5 } }}
-              >
-                <i className={item.icon}></i>
-              </motion.div>
-              <div className="fb-content">
-                <h4>{item.title}</h4>
-                <p>{item.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+          <div className="wave-particles">
+            {Array.from({ length: 30 }).map((_, i) => (
+              <span key={i} className="wave-dot" style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`,
+                width: `${2 + Math.random() * 4}px`,
+                height: `${2 + Math.random() * 4}px`,
+              }} />
+            ))}
+          </div>
+          <div className="wave-layer wave-1"></div>
+          <div className="wave-layer wave-2"></div>
+          <div className="wave-layer wave-3"></div>
+          <div className="wave-glow"></div>
+          <div className="wave-content">
+            <span className="wave-tagline">Создаём будущее вместе</span>
+            <div className="wave-techs">
+              {["React", "TypeScript", "Node.js", "AI", "Design"].map((t, i) => (
+                <motion.span 
+                  key={t} 
+                  className="wave-tech"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.2 + i * 0.1, type: "spring", stiffness: 200 }}
+                  whileHover={{ scale: 1.15, y: -3 }}
+                >
+                  {t}
+                </motion.span>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </section>
 

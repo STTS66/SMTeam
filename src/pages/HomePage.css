@@ -145,84 +145,140 @@
   left: 130%;
 }
 
-.hero-visual {
-  width: 100%;
-  position: relative;
-  z-index: 2;
-  margin-top: 20px;
-}
-
-.hero-features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+/* Wave Banner */
+.hero-wave-banner {
   width: 100%;
   max-width: 900px;
+  height: 260px;
   margin: 30px auto 0;
-}
-
-.feature-box {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 28px;
-  background: rgba(17, 17, 39, 0.75);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  text-align: left;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
+  border-radius: 24px;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, #0a0a1a 0%, #111127 50%, #1a0a14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 59, 48, 0.08);
 }
 
-.feature-box::before {
-  content: '';
+.wave-particles {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 59, 48, 0.12), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s;
+  z-index: 1;
 }
 
-.feature-box:hover::before {
-  opacity: 1;
+.wave-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 59, 48, 0.5);
+  box-shadow: 0 0 6px rgba(255, 59, 48, 0.4);
+  animation: waveDotFloat ease-in-out infinite alternate;
 }
 
-.feature-box:hover .fb-icon {
-  background: linear-gradient(135deg, rgba(255, 59, 48, 0.3), rgba(255, 105, 97, 0.15));
-  box-shadow: 0 0 20px rgba(255, 59, 48, 0.2);
+@keyframes waveDotFloat {
+  0% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-20px) scale(1.3); opacity: 0.2; }
 }
 
-.fb-icon {
-  width: 52px;
-  height: 52px;
-  flex-shrink: 0;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(255, 59, 48, 0.15), rgba(255, 105, 97, 0.05));
-  color: #ff3b30;
+.wave-layer {
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 120%;
+  height: 120px;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.15;
+}
+
+.wave-1 {
+  background: linear-gradient(180deg, transparent, #ff3b30);
+  animation: waveMove1 6s ease-in-out infinite alternate;
+}
+
+.wave-2 {
+  background: linear-gradient(180deg, transparent, #ff6961);
+  height: 100px;
+  animation: waveMove2 8s ease-in-out infinite alternate-reverse;
+}
+
+.wave-3 {
+  background: linear-gradient(180deg, transparent, #8e8e93);
+  height: 80px;
+  animation: waveMove3 10s ease-in-out infinite alternate;
+}
+
+@keyframes waveMove1 {
+  0% { transform: translateX(-5%) scaleY(1); }
+  100% { transform: translateX(5%) scaleY(1.3); }
+}
+
+@keyframes waveMove2 {
+  0% { transform: translateX(3%) scaleY(1.1); }
+  100% { transform: translateX(-3%) scaleY(0.8); }
+}
+
+@keyframes waveMove3 {
+  0% { transform: translateX(-2%) scaleY(0.9); }
+  100% { transform: translateX(4%) scaleY(1.2); }
+}
+
+.wave-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 59, 48, 0.15), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.wave-content {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  transition: all 0.35s ease;
+  gap: 20px;
 }
 
-.fb-content h4 {
+.wave-tagline {
   font-family: 'Outfit', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 26px;
+  font-weight: 800;
   color: #fff;
-  margin-bottom: 8px;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
 }
 
-.fb-content p {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 14px;
+.wave-techs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.wave-tech {
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-secondary);
-  line-height: 1.5;
-  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.wave-tech:hover {
+  background: rgba(255, 59, 48, 0.15);
+  border-color: rgba(255, 59, 48, 0.4);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(255, 59, 48, 0.2);
 }
 
 /* Stats */
@@ -381,8 +437,16 @@
     line-height: 1.5;
   }
 
-  .hero-features-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .hero-wave-banner {
+    height: 200px;
+  }
+
+  .wave-tagline {
+    font-size: 18px;
+  }
+
+  .wave-tech {
+    padding: 6px 12px;
+    font-size: 11px;
   }
 }
