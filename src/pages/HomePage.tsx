@@ -153,7 +153,7 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         >
           <div className="dash-card main-card">
             <div className="dash-header">
-              <div className="dash-icon"><i className="fi fi-br-chart-line-up"></i></div>
+              <div className="dash-icon"><i className="fi fi-rr-chart-histogram"></i></div>
               <span>SMTeam Analytics</span>
             </div>
             <div className="dash-chart">
@@ -167,7 +167,7 @@ export default function HomePage({ goToProjects }: HomePageProps) {
           </div>
           
           <div className="dash-card float-card float-1">
-            <div className="fc-icon red"><i className="fi fi-br-mobile-button"></i></div>
+            <div className="fc-icon red"><i className="fi fi-rr-smartphone"></i></div>
             <div className="fc-text">
               <strong>Mobile Apps</strong>
               <span>React Native / iOS</span>
@@ -175,7 +175,7 @@ export default function HomePage({ goToProjects }: HomePageProps) {
           </div>
 
           <div className="dash-card float-card float-2">
-            <div className="fc-icon blue"><i className="fi fi-br-brain"></i></div>
+            <div className="fc-icon blue"><i className="fi fi-rr-brain"></i></div>
             <div className="fc-text">
               <strong>AI & ML</strong>
               <span>Neural Networks</span>
@@ -183,7 +183,7 @@ export default function HomePage({ goToProjects }: HomePageProps) {
           </div>
           
           <div className="dash-card float-card float-3">
-            <div className="fc-icon purple"><i className="fi fi-br-desktop"></i></div>
+            <div className="fc-icon purple"><i className="fi fi-rr-laptop"></i></div>
             <div className="fc-text">
               <strong>Web Platforms</strong>
               <span>High Performance</span>
