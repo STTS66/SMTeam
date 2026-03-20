@@ -146,21 +146,34 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-radar-panel"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="hero-code-panel"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <div className="radar-circle">
-            <div className="radar-grid"></div>
-            <div className="radar-beam"></div>
-            
-            <div className="radar-dot dot-1"><div className="dot-pulse"></div><span>10+ Проектов</span></div>
-            <div className="radar-dot dot-2"><div className="dot-pulse"></div><span>Web & Mobile</span></div>
-            <div className="radar-dot dot-3"><div className="dot-pulse"></div><span>Нейросети</span></div>
-            <div className="radar-dot dot-4"><div className="dot-pulse"></div><span>Автоматизация</span></div>
-            
-            <div className="radar-logo">SM</div>
+          <div className="code-header">
+            <div className="code-dots">
+              <span className="code-dot red"></span>
+              <span className="code-dot yellow"></span>
+              <span className="code-dot green"></span>
+            </div>
+            <div className="code-title">SMTeam_Core.ts — VS Code</div>
+            <div className="code-spacer"></div>
+          </div>
+          <div className="code-body">
+            <div className="code-line"><span className="code-keyword">import</span> <span className="code-variable">{'{'}</span> innovation, speed, quality <span className="code-variable">{'}'}</span> <span className="code-keyword">from</span> <span className="code-string">'@smteam/core'</span>;</div>
+            <div className="code-line"><br/></div>
+            <div className="code-line"><span className="code-keyword">class</span> <span className="code-class">Future</span> <span className="code-keyword">extends</span> <span className="code-class">Project</span> {'{'}</div>
+            <div className="code-line">  <span className="code-keyword">constructor</span>() {'{'}</div>
+            <div className="code-line">    <span className="code-keyword">super</span>();</div>
+            <div className="code-line">    <span className="code-keyword">this</span>.<span className="code-property">team</span> = [<span className="code-string">'Developers'</span>, <span className="code-string">'Designers'</span>, <span className="code-string">'AI Engineers'</span>];</div>
+            <div className="code-line">  {'}'}</div>
+            <div className="code-line"><br/></div>
+            <div className="code-line">  <span className="code-keyword">async</span> <span className="code-function">buildAwesomeProduct</span>() {'{'}</div>
+            <div className="code-line">    <span className="code-keyword">await</span> <span className="code-function">innovation</span>.<span className="code-function">inject</span>();</div>
+            <div className="code-line">    <span className="code-keyword">return</span> <span className="code-string">"🚀 Success guaranteed!"</span><span className="code-cursor"></span></div>
+            <div className="code-line">  {'}'}</div>
+            <div className="code-line">{'}'}</div>
           </div>
         </motion.div>
       </section>
