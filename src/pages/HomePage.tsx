@@ -146,34 +146,48 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-code-panel"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="hero-dash-panel"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <div className="code-header">
-            <div className="code-dots">
-              <span className="code-dot red"></span>
-              <span className="code-dot yellow"></span>
-              <span className="code-dot green"></span>
+          <div className="dash-card main-card">
+            <div className="dash-header">
+              <div className="dash-icon"><i className="fi fi-br-chart-line-up"></i></div>
+              <span>SMTeam Analytics</span>
             </div>
-            <div className="code-title">SMTeam_Core.ts — VS Code</div>
-            <div className="code-spacer"></div>
+            <div className="dash-chart">
+               <div className="chart-bar" style={{height: '40%'}}></div>
+               <div className="chart-bar" style={{height: '60%'}}></div>
+               <div className="chart-bar" style={{height: '35%'}}></div>
+               <div className="chart-bar" style={{height: '80%'}}></div>
+               <div className="chart-bar" style={{height: '100%'}}></div>
+               <div className="chart-bar" style={{height: '70%'}}></div>
+            </div>
           </div>
-          <div className="code-body">
-            <div className="code-line"><span className="code-keyword">import</span> <span className="code-variable">{'{'}</span> innovation, speed, quality <span className="code-variable">{'}'}</span> <span className="code-keyword">from</span> <span className="code-string">'@smteam/core'</span>;</div>
-            <div className="code-line"><br/></div>
-            <div className="code-line"><span className="code-keyword">class</span> <span className="code-class">Future</span> <span className="code-keyword">extends</span> <span className="code-class">Project</span> {'{'}</div>
-            <div className="code-line">  <span className="code-keyword">constructor</span>() {'{'}</div>
-            <div className="code-line">    <span className="code-keyword">super</span>();</div>
-            <div className="code-line">    <span className="code-keyword">this</span>.<span className="code-property">team</span> = [<span className="code-string">'Developers'</span>, <span className="code-string">'Designers'</span>, <span className="code-string">'AI Engineers'</span>];</div>
-            <div className="code-line">  {'}'}</div>
-            <div className="code-line"><br/></div>
-            <div className="code-line">  <span className="code-keyword">async</span> <span className="code-function">buildAwesomeProduct</span>() {'{'}</div>
-            <div className="code-line">    <span className="code-keyword">await</span> <span className="code-function">innovation</span>.<span className="code-function">inject</span>();</div>
-            <div className="code-line">    <span className="code-keyword">return</span> <span className="code-string">"🚀 Success guaranteed!"</span><span className="code-cursor"></span></div>
-            <div className="code-line">  {'}'}</div>
-            <div className="code-line">{'}'}</div>
+          
+          <div className="dash-card float-card float-1">
+            <div className="fc-icon red"><i className="fi fi-br-mobile-button"></i></div>
+            <div className="fc-text">
+              <strong>Mobile Apps</strong>
+              <span>React Native / iOS</span>
+            </div>
+          </div>
+
+          <div className="dash-card float-card float-2">
+            <div className="fc-icon blue"><i className="fi fi-br-brain"></i></div>
+            <div className="fc-text">
+              <strong>AI & ML</strong>
+              <span>Neural Networks</span>
+            </div>
+          </div>
+          
+          <div className="dash-card float-card float-3">
+            <div className="fc-icon purple"><i className="fi fi-br-desktop"></i></div>
+            <div className="fc-text">
+              <strong>Web Platforms</strong>
+              <span>High Performance</span>
+            </div>
           </div>
         </motion.div>
       </section>
