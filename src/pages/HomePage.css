@@ -151,11 +151,11 @@
   max-width: 750px;
   margin: 30px auto 0;
   background: rgba(5, 5, 15, 0.92);
-  border: 1px solid rgba(0, 255, 65, 0.15);
+  border: 1px solid rgba(255, 59, 48, 0.15);
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 0 50px rgba(0, 255, 65, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 50px rgba(255, 59, 48, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
   font-family: 'Fira Code', 'Courier New', monospace;
 }
 
@@ -166,8 +166,8 @@
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 255, 65, 0.015) 2px,
-    rgba(0, 255, 65, 0.015) 4px
+    rgba(255, 59, 48, 0.015) 2px,
+    rgba(255, 59, 48, 0.015) 4px
   );
   pointer-events: none;
   z-index: 10;
@@ -176,7 +176,7 @@
 .jb-glitch-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 65, 0.03) 50%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 59, 48, 0.03) 50%, transparent 100%);
   animation: jbScanMove 4s linear infinite;
   pointer-events: none;
   z-index: 10;
@@ -192,16 +192,16 @@
   align-items: center;
   gap: 10px;
   padding: 14px 20px;
-  background: rgba(0, 255, 65, 0.05);
-  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+  background: rgba(255, 59, 48, 0.05);
+  border-bottom: 1px solid rgba(255, 59, 48, 0.1);
 }
 
 .jb-status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #00ff41;
-  box-shadow: 0 0 8px #00ff41;
+  background: #ff3b30;
+  box-shadow: 0 0 8px #ff3b30;
   animation: jbBlink 1.5s ease-in-out infinite;
 }
 
@@ -212,7 +212,7 @@
 
 .jb-header-text {
   font-size: 12px;
-  color: #00ff41;
+  color: #ff3b30;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-weight: 600;
@@ -237,10 +237,10 @@
 }
 
 .jb-prefix.warn { color: #ff9500; }
-.jb-prefix.ok { color: #00ff41; }
+.jb-prefix.ok { color: #ff3b30; }
 
 .jb-dim { color: #8e8e93; }
-.jb-green { color: #00ff41; }
+.jb-green { color: #ff6961; }
 .jb-red { color: #ff3b30; font-weight: 700; }
 
 .jb-big {
@@ -252,8 +252,8 @@
   font-family: 'Outfit', sans-serif;
   font-size: 36px;
   font-weight: 900;
-  color: #00ff41;
-  text-shadow: 0 0 20px rgba(0, 255, 65, 0.5), 0 0 60px rgba(0, 255, 65, 0.2);
+  color: #ff3b30;
+  text-shadow: 0 0 20px rgba(255, 59, 48, 0.5), 0 0 60px rgba(255, 59, 48, 0.2);
   letter-spacing: 6px;
   position: relative;
   display: inline-block;
@@ -271,7 +271,7 @@
 }
 
 .jb-glitch-text::before {
-  color: #ff3b30;
+  color: #ff6961;
   animation: jbGlitchLeft 2s ease-in-out infinite alternate;
   clip-path: inset(0 65% 0 0);
 }
@@ -305,18 +305,21 @@
 
 .jb-footer {
   padding: 14px 24px;
-  border-top: 1px solid rgba(0, 255, 65, 0.1);
+  border-top: 1px solid rgba(255, 59, 48, 0.1);
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
 .jb-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 5px 14px;
   border-radius: 100px;
-  background: rgba(0, 255, 65, 0.08);
-  border: 1px solid rgba(0, 255, 65, 0.2);
-  color: #00ff41;
+  background: rgba(255, 59, 48, 0.08);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  color: #ff3b30;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -324,9 +327,13 @@
   cursor: pointer;
 }
 
+.jb-tag i {
+  font-size: 12px;
+}
+
 .jb-tag:hover {
-  background: rgba(0, 255, 65, 0.18);
-  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  background: rgba(255, 59, 48, 0.18);
+  box-shadow: 0 0 15px rgba(255, 59, 48, 0.2);
   transform: translateY(-2px);
 }
 

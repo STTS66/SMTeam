@@ -182,9 +182,9 @@ export default function HomePage({ goToProjects }: HomePageProps) {
             </motion.div>
           </div>
           <div className="jb-footer">
-            <span className="jb-tag">🔓 JAILBREAK</span>
-            <span className="jb-tag">🧠 PROMPT INJECTION</span>
-            <span className="jb-tag">⚡ DAN MODE</span>
+            <span className="jb-tag"><i className="fi fi-br-unlock"></i> JAILBREAK</span>
+            <span className="jb-tag"><i className="fi fi-br-brain"></i> PROMPT INJECTION</span>
+            <span className="jb-tag"><i className="fi fi-br-bolt"></i> DAN MODE</span>
           </div>
         </motion.div>
       </section>
