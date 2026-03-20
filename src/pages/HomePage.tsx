@@ -146,47 +146,28 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-dash-panel"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          className="hero-cards-deck"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <div className="dash-card main-card">
-            <div className="dash-header">
-              <div className="dash-icon"><i className="fi fi-rr-chart-histogram"></i></div>
-              <span>SMTeam Analytics</span>
-            </div>
-            <div className="dash-chart">
-               <div className="chart-bar" style={{height: '40%'}}></div>
-               <div className="chart-bar" style={{height: '60%'}}></div>
-               <div className="chart-bar" style={{height: '35%'}}></div>
-               <div className="chart-bar" style={{height: '80%'}}></div>
-               <div className="chart-bar" style={{height: '100%'}}></div>
-               <div className="chart-bar" style={{height: '70%'}}></div>
-            </div>
+          <div className="deck-card card-back">
+            <div className="dc-icon"><i className="fi fi-rr-laptop"></i></div>
+            <h4>Web Platforms</h4>
+            <p>Высоконагруженные веб-приложения и корпоративные порталы.</p>
           </div>
-          
-          <div className="dash-card float-card float-1">
-            <div className="fc-icon red"><i className="fi fi-rr-smartphone"></i></div>
-            <div className="fc-text">
-              <strong>Mobile Apps</strong>
-              <span>React Native / iOS</span>
-            </div>
+          <div className="deck-card card-middle">
+            <div className="dc-icon"><i className="fi fi-rr-smartphone"></i></div>
+            <h4>Mobile Dev</h4>
+            <p>React Native и нативные приложения под iOS и Android.</p>
           </div>
-
-          <div className="dash-card float-card float-2">
-            <div className="fc-icon blue"><i className="fi fi-rr-brain"></i></div>
-            <div className="fc-text">
-              <strong>AI & ML</strong>
-              <span>Neural Networks</span>
-            </div>
-          </div>
-          
-          <div className="dash-card float-card float-3">
-            <div className="fc-icon purple"><i className="fi fi-rr-laptop"></i></div>
-            <div className="fc-text">
-              <strong>Web Platforms</strong>
-              <span>High Performance</span>
+          <div className="deck-card card-front">
+            <div className="fc-glow"></div>
+            <div className="dc-icon main"><i className="fi fi-rr-brain"></i></div>
+            <h2>AI Solutions</h2>
+            <p>Интеграция нейросетей, машинное обучение и LLM-агенты под ваш бизнес.</p>
+            <div className="dc-mini-bars">
+              <span></span><span></span><span></span><span></span><span></span>
             </div>
           </div>
         </motion.div>
