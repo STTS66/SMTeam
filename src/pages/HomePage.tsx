@@ -147,41 +147,43 @@ export default function HomePage({ goToProjects }: HomePageProps) {
 
         <motion.div
           className="hero-features-grid"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.8 } },
+          }}
         >
-          <div className="feature-box box-1">
-            <div className="fb-icon"><i className="fi fi-br-rocket-lunch"></i></div>
-            <div className="fb-content">
-              <h4>Быстрый релиз</h4>
-              <p>От идеи до продакшена в рекордные сроки без потери качества</p>
-            </div>
-          </div>
-          
-          <div className="feature-box box-2">
-            <div className="fb-icon"><i className="fi fi-br-lightbulb-on"></i></div>
-            <div className="fb-content">
-              <h4>Инновации</h4>
-              <p>Внедряем современные AI-технологии и нестандартные подходы</p>
-            </div>
-          </div>
-          
-          <div className="feature-box box-3">
-            <div className="fb-icon"><i className="fi fi-br-bolt"></i></div>
-            <div className="fb-content">
-              <h4>Мощный стек</h4>
-              <p>React, TypeScript, современные фреймворки и чистая архитектура</p>
-            </div>
-          </div>
-          
-          <div className="feature-box box-4">
-            <div className="fb-icon"><i className="fi fi-br-bullseye-pointer"></i></div>
-            <div className="fb-content">
-              <h4>Супер Результат</h4>
-              <p>Создаём топовые продукты, которые действительно нравятся людям</p>
-            </div>
-          </div>
+          {[
+            { icon: "fi fi-br-rocket-lunch", title: "Быстрый релиз", desc: "От идеи до продакшена в рекордные сроки без потери качества" },
+            { icon: "fi fi-br-lightbulb-on", title: "Инновации", desc: "Внедряем современные AI-технологии и нестандартные подходы" },
+            { icon: "fi fi-br-bolt", title: "Мощный стек", desc: "React, TypeScript, современные фреймворки и чистая архитектура" },
+            { icon: "fi fi-br-bullseye-pointer", title: "Супер Результат", desc: "Создаём топовые продукты, которые действительно нравятся людям" },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              className="feature-box"
+              variants={{ hidden: { opacity: 0, y: 30, scale: 0.95 }, visible: { opacity: 1, y: 0, scale: 1 } }}
+              whileHover={{ 
+                y: -8, 
+                scale: 1.04, 
+                boxShadow: "0 25px 60px rgba(255, 59, 48, 0.2), 0 0 30px rgba(255, 59, 48, 0.1)",
+                borderColor: "rgba(255, 59, 48, 0.4)",
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <motion.div 
+                className="fb-icon"
+                whileHover={{ rotate: [0, -10, 10, -5, 0], transition: { duration: 0.5 } }}
+              >
+                <i className={item.icon}></i>
+              </motion.div>
+              <div className="fb-content">
+                <h4>{item.title}</h4>
+                <p>{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </section>
 
@@ -194,36 +196,31 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         transition={{ duration: 0.6 }}
       >
         <div className="stats-grid">
-          <motion.div 
-            className="stat-card"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.5, type: 'spring' }}
-          >
-            <span className="stat-number" style={{ color: 'var(--accent-blue)' }}>{projects.length}</span>
-            <span className="stat-label">Проектов</span>
-          </motion.div>
-          <motion.div 
-            className="stat-card"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
-          >
-            <span className="stat-number" style={{ color: 'var(--accent-purple)' }}>SM</span>
-            <span className="stat-label">Команда</span>
-          </motion.div>
-          <motion.div 
-            className="stat-card"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.5, type: 'spring' }}
-          >
-            <span className="stat-number" style={{ color: 'var(--accent-cyan)' }}>∞</span>
-            <span className="stat-label">Идей</span>
-          </motion.div>
+          {[
+            { value: projects.length, label: "Проектов", color: "var(--accent-blue)" },
+            { value: "SM", label: "Команда", color: "var(--accent-purple)" },
+            { value: "∞", label: "Идей", color: "var(--accent-cyan)" },
+          ].map((stat, i) => (
+            <motion.div 
+              key={i}
+              className="stat-card"
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + i * 0.2, duration: 0.5, type: 'spring' }}
+              whileHover={{ 
+                y: -10, 
+                scale: 1.06,
+                boxShadow: "0 20px 50px rgba(255, 59, 48, 0.15), 0 0 25px rgba(255, 59, 48, 0.08)",
+                borderColor: "rgba(255, 59, 48, 0.3)",
+                transition: { type: "spring", stiffness: 400, damping: 15 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="stat-number" style={{ color: stat.color }}>{stat.value}</span>
+              <span className="stat-label">{stat.label}</span>
+            </motion.div>
+          ))}
         </div>
       </motion.section>
 
