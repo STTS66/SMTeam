@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useAnimationFrame } from 'framer-motion';
 import './HomePage.css';
 import { useProjects } from '../contexts/ProjectContext';
 import ProjectCard from '../components/ProjectCard';
@@ -51,6 +51,86 @@ function TypewriterText({ text, delay = 0, cursor = true }: { text: string; dela
 
 interface HomePageProps {
   goToProjects: () => void;
+}
+
+function DraggableCube() {
+  const cubeRef = useRef<HTMLDivElement>(null);
+  const rotX = useRef(-20);
+  const rotY = useRef(0);
+  const autoSpinY = useRef(0);
+  const isDragging = useRef(false);
+  const lastMouse = useRef({ x: 0, y: 0 });
+  const velocity = useRef({ x: 0, y: 0 });
+
+  // Auto spin + inertia
+  useAnimationFrame(() => {
+    if (!cubeRef.current) return;
+    if (!isDragging.current) {
+      // Inertia
+      velocity.current.x *= 0.95;
+      velocity.current.y *= 0.95;
+      // Auto-spin if low velocity
+      if (Math.abs(velocity.current.y) < 0.3) {
+        autoSpinY.current += 0.4;
+      } else {
+        autoSpinY.current = 0;
+      }
+      rotY.current += velocity.current.y + autoSpinY.current * 0.05;
+      rotX.current += velocity.current.x;
+    }
+    cubeRef.current.style.transform = `rotateX(${rotX.current}deg) rotateY(${rotY.current}deg)`;
+  });
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    isDragging.current = true;
+    lastMouse.current = { x: e.clientX, y: e.clientY };
+    velocity.current = { x: 0, y: 0 };
+    autoSpinY.current = 0;
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging.current) return;
+    const dx = e.clientX - lastMouse.current.x;
+    const dy = e.clientY - lastMouse.current.y;
+    velocity.current = { x: dy * 0.25, y: dx * 0.25 };
+    rotY.current += dx * 0.5;
+    rotX.current += dy * 0.5;
+    lastMouse.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const onPointerUp = () => { isDragging.current = false; };
+
+  const faces = [
+    { cls: 'cube-front',  icon: 'fi fi-rr-browser',       label: 'Web',   hint: 'Веб-разработка' },
+    { cls: 'cube-back',   icon: 'fi fi-rr-smartphone',     label: 'App',   hint: 'Мобильные приложения' },
+    { cls: 'cube-right',  icon: 'fi fi-rr-shield-check',   label: 'Sec',   hint: 'Кибербезопасность' },
+    { cls: 'cube-left',   icon: 'fi fi-rr-database',       label: 'Data',  hint: 'Данные и базы' },
+    { cls: 'cube-top',    icon: 'fi fi-rr-brain',          label: 'AI',    hint: 'Нейросети и ML' },
+    { cls: 'cube-bottom', icon: 'fi fi-rr-rocket-lunch',   label: 'Boost', hint: 'Масштабирование' },
+  ];
+
+  return (
+    <div
+      className="hero-data-cube-wrap"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
+    >
+      <div className="cube-drag-hint"><i className="fi fi-rr-cursor"></i> Крутить мышкой</div>
+      <div className="hero-data-cube" ref={cubeRef}>
+        <div className="cube-core"></div>
+        {faces.map(f => (
+          <div key={f.cls} className={`cube-face ${f.cls}`}>
+            <i className={f.icon}></i>
+            <span>{f.label}</span>
+            <small>{f.hint}</small>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default function HomePage({ goToProjects }: HomePageProps) {
@@ -145,40 +225,7 @@ export default function HomePage({ goToProjects }: HomePageProps) {
           </motion.button>
         </motion.div>
 
-        <motion.div
-           className="hero-data-cube-wrap"
-           initial={{ opacity: 0, scale: 0.5 }}
-           animate={{ opacity: 1, scale: 1 }}
-           transition={{ delay: 0.5, type: 'spring' }}
-        >
-          <div className="hero-data-cube">
-            <div className="cube-core"></div>
-            <div className="cube-face cube-front">
-              <i className="fi fi-rr-browser"></i>
-              <span>Web</span>
-            </div>
-            <div className="cube-face cube-back">
-               <i className="fi fi-rr-smartphone"></i>
-               <span>App</span>
-            </div>
-            <div className="cube-face cube-right">
-               <i className="fi fi-rr-shield-check"></i>
-               <span>Sec</span>
-            </div>
-            <div className="cube-face cube-left">
-               <i className="fi fi-rr-database"></i>
-               <span>Data</span>
-            </div>
-            <div className="cube-face cube-top">
-               <i className="fi fi-rr-brain"></i>
-               <span>AI</span>
-            </div>
-            <div className="cube-face cube-bottom">
-               <i className="fi fi-rr-rocket-lunch"></i>
-               <span>Boost</span>
-            </div>
-          </div>
-        </motion.div>
+        <DraggableCube />
       </section>
 
       {/* Stats Section */}
