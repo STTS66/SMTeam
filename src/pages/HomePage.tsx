@@ -146,43 +146,41 @@ export default function HomePage({ goToProjects }: HomePageProps) {
         </motion.div>
 
         <motion.div
-          className="hero-wave-banner"
+          className="hero-team-showcase"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 1 }}
         >
-          <div className="wave-particles">
-            {Array.from({ length: 30 }).map((_, i) => (
-              <span key={i} className="wave-dot" style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`,
-                width: `${2 + Math.random() * 4}px`,
-                height: `${2 + Math.random() * 4}px`,
-              }} />
+          <div className="team-orbit">
+            <div className="team-center-logo">
+              <span className="tcl-text">SM</span>
+              <div className="tcl-ring"></div>
+              <div className="tcl-ring tcl-ring-2"></div>
+            </div>
+            {[
+              { emoji: "👨‍💻", name: "Разработка", angle: 0 },
+              { emoji: "🎨", name: "Дизайн", angle: 72 },
+              { emoji: "🧠", name: "AI / ML", angle: 144 },
+              { emoji: "🚀", name: "DevOps", angle: 216 },
+              { emoji: "📱", name: "Mobile", angle: 288 },
+            ].map((member, i) => (
+              <motion.div
+                key={i}
+                className="team-member"
+                style={{ '--angle': `${member.angle}deg` } as React.CSSProperties}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1 + i * 0.15, type: "spring", stiffness: 200 }}
+                whileHover={{ scale: 1.2, zIndex: 10 }}
+              >
+                <span className="tm-emoji">{member.emoji}</span>
+                <span className="tm-name">{member.name}</span>
+              </motion.div>
             ))}
           </div>
-          <div className="wave-layer wave-1"></div>
-          <div className="wave-layer wave-2"></div>
-          <div className="wave-layer wave-3"></div>
-          <div className="wave-glow"></div>
-          <div className="wave-content">
-            <span className="wave-tagline">Создаём будущее вместе</span>
-            <div className="wave-techs">
-              {["React", "TypeScript", "Node.js", "AI", "Design"].map((t, i) => (
-                <motion.span 
-                  key={t} 
-                  className="wave-tech"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.2 + i * 0.1, type: "spring", stiffness: 200 }}
-                  whileHover={{ scale: 1.15, y: -3 }}
-                >
-                  {t}
-                </motion.span>
-              ))}
-            </div>
+          <div className="team-tagline">
+            <span className="tt-number">5+</span>
+            <span className="tt-label">направлений<br/>в нашей команде</span>
           </div>
         </motion.div>
       </section>
